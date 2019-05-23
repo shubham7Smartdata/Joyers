@@ -75,7 +75,6 @@ class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 RC_SIGN_IN -> {
-
                     // The Task returned from this call is always completed, no need to attach
                     // a listener.
                     val task = GoogleSignIn.getSignedInAccountFromIntent(data)

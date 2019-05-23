@@ -3,13 +3,20 @@ package com.sdi.joyers.activities
 import android.annotation.TargetApi
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.AndroidViewModel
+import com.google.android.material.snackbar.Snackbar
+import com.sdi.joyers.R
+import com.sdi.joyers.utils.ConnectionDetector
 import com.sdi.joyers.utils.NetworkUtils
+
 
 /**
  * Created by shubham on 22/05/19.
@@ -17,11 +24,12 @@ import com.sdi.joyers.utils.NetworkUtils
 
 abstract class BaseActivity<V : AndroidViewModel> : AppCompatActivity() {
 
-    // since its going to be common for all the activities
-    var mViewModel: V? = null
     var TAG: String = "$localClassName:-"
 
+    // since its going to be common for all the activities
+    var mViewModel: V? = null
     lateinit var mContext: Context
+    private var mSnackbar: Snackbar? = null
 
     /**
      * Override for set binding variable
@@ -49,6 +57,7 @@ abstract class BaseActivity<V : AndroidViewModel> : AppCompatActivity() {
      */
     protected abstract val context: Context
 
+
     val isNetworkConnected: Boolean
         get() = NetworkUtils.isNetworkConnected(applicationContext)
 
@@ -74,11 +83,6 @@ abstract class BaseActivity<V : AndroidViewModel> : AppCompatActivity() {
         }
     }
 
-    //    fun hideLoading() {
-    //        if (mProgressDialog != null && mProgressDialog.isShowing) {
-    //            mProgressDialog.cancel()
-    //        }
-    //    }
 
     @TargetApi(Build.VERSION_CODES.M)
     fun requestPermissionsSafely(permissions: Array<String>, requestCode: Int) {
@@ -87,13 +91,55 @@ abstract class BaseActivity<V : AndroidViewModel> : AppCompatActivity() {
         }
     }
 
+    //    fun hideLoading() {
+    //        if (mProgressDialog != null && mProgressDialog.isShowing) {
+    //            mProgressDialog.cancel()
+    //        }
+    //    }
+
+
     //    public void showLoading() {
     //        hideLoading();
     //        mProgressDialog = CommonUtils.showLoadingDialog(this);
     //    }
 
     abstract fun onCreate()
+
     abstract fun initListeners()
+
+    protected fun showSnackBar(view: View, message: String) {
+        mSnackbar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
+        mSnackbar!!.show()
+    }
+
+
+    fun toast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    protected fun showAlertSnackBar(view: View, message: String) {
+        mSnackbar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
+        mSnackbar!!.view.setBackgroundColor(Color.RED)
+        mSnackbar!!.show()
+    }
+
+    fun connectedToInternet(): Boolean {
+        return ConnectionDetector(mContext).isConnectingToInternet
+    }
+
+    fun connectedToInternet(view: View): Boolean {
+        return if (ConnectionDetector(mContext).isConnectingToInternet) {
+            true
+        } else {
+            showInternetAlert(view)
+            false
+        }
+    }
+
+    fun showInternetAlert(view: View) {
+        mSnackbar = Snackbar.make(view, R.string.errorInternet, Snackbar.LENGTH_SHORT)
+        mSnackbar!!.show()
+    }
 
 }
 
