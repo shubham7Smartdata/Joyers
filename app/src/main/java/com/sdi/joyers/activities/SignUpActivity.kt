@@ -34,7 +34,6 @@ class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
     private val RC_SIGN_IN = 1
     lateinit var mGoogleSignInClient: GoogleSignInClient
 
-
     override fun onCreate() {
         mViewModel!!.getUser().observe(this, object : Observer<UserModel> {
             override fun onChanged(@Nullable loginUser: UserModel) {
@@ -118,10 +117,7 @@ class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
 
     private fun updateUI(account: GoogleSignInAccount) {
         mViewModel!!.setLoginData(
-            UserModel(
-                "1", account.email.toString(),
-                account.displayName.toString()
-            )
+            UserModel("1", account.email.toString(), account.displayName.toString())
         )
     }
 }
