@@ -53,7 +53,7 @@ abstract class BaseActivity<V : AndroidViewModel> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutId)
-        mContext = context
+        this.mContext = context
         this.mViewModel = if (mViewModel == null) viewModel else mViewModel
         onCreate()
         initListeners()
@@ -89,13 +89,6 @@ abstract class BaseActivity<V : AndroidViewModel> : AppCompatActivity() {
     //        hideLoading();
     //        mProgressDialog = CommonUtils.showLoadingDialog(this);
     //    }
-
-//    private fun performDataBinding() {
-//        viewDataBinding = DataBindingUtil.setContentView(mContext as Activity, layoutId)
-//
-//        viewDataBinding!!.setVariable(bindingVariable, mViewModel)
-//        viewDataBinding!!.executePendingBindings()
-//    }
 
     abstract fun onCreate()
     abstract fun initListeners()
