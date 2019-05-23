@@ -1,10 +1,19 @@
 package com.sdi.joyers.activities
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.View
 import androidx.annotation.Nullable
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
 import com.sdi.joyers.R
 import com.sdi.joyers.data.UserModel
 import com.sdi.joyers.viewModel.UserViewModel
@@ -22,11 +31,15 @@ class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
     override val context: Context
         get() = this@SignUpActivity
 
+    private val RC_SIGN_IN = 1
+    lateinit var mGoogleSignInClient: GoogleSignInClient
+
+
     override fun onCreate() {
         mViewModel!!.getUser().observe(this, object : Observer<UserModel> {
             override fun onChanged(@Nullable loginUser: UserModel) {
-                lblEmailAnswer.text = loginUser.email
-                lblPasswordAnswer.text = loginUser.name
+                txtEmail.text = loginUser.email
+                txtName.text = loginUser.name
             }
         })
     }
@@ -40,19 +53,77 @@ class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
             R.id.btnLogin -> {
                 mViewModel!!.setLoginData(
                     UserModel(
-                        "1", txtEmailAddress.text.toString(),
-                        txtPassword.text.toString())
+                        "1", edEmail.text.toString(),
+                        edName.text.toString()
+                    )
                 )
             }
 //            R.id.btn_fb_login -> {
 //
 //            }
 
-//            R.id.btn_google_login -> {
-//
-//            }
+            R.id.btn_google_login -> {
+
+            }
         }
     }
 
+
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                RC_SIGN_IN -> {
+
+                    // The Task returned from this call is always completed, no need to attach
+                    // a listener.
+                    val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+                    handleSignInResult(task)
+                }
+                Activity.RESULT_CANCELED -> {
+                }
+            }
+        }
+
+    }
+
+    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+        try {
+            val account = completedTask.getResult(ApiException::class.java)
+
+            // Signed in successfully, show authenticated UI.
+            Log.w(TAG, "signInResult: code=" + account!!)
+            mGoogleSignInClient.signOut()
+
+            updateUI(account)
+        } catch (e: ApiException) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w(TAG, "signInResult:failed code=" + e.statusCode)
+            //            updateUI(null);
+        }
+
+    }
+
+    private fun signInGmail() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build()
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+        val account = GoogleSignIn.getLastSignedInAccount(this)
+        val signInIntent = mGoogleSignInClient.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
+
+    private fun updateUI(account: GoogleSignInAccount) {
+        mViewModel!!.setLoginData(
+            UserModel(
+                "1", account.email.toString(),
+                account.displayName.toString()
+            )
+        )
+    }
 }
 

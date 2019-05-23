@@ -19,6 +19,7 @@ abstract class BaseActivity<V : AndroidViewModel> : AppCompatActivity() {
 
     // since its going to be common for all the activities
     var mViewModel: V? = null
+    var TAG: String = "$localClassName:-"
     lateinit var mContext: Context
 
     /**

@@ -1,16 +1,8 @@
 package com.sdi.joyers.viewModel
 
-import android.app.Activity
 import android.app.Application
-import android.content.Intent
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Task
 import com.sdi.joyers.data.UserModel
 import com.sdi.joyers.repositories.UserRepository
 
@@ -19,9 +11,8 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
     private val mRepository: UserRepository = UserRepository(application)
 
-    private val RC_SIGN_IN = 1
     private var mUserModel: MutableLiveData<UserModel>? = null
-    lateinit var mGoogleSignInClient: GoogleSignInClient
+
 
     fun getUser(): MutableLiveData<UserModel> {
         if (mUserModel == null) {
