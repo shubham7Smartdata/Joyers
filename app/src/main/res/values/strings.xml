@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">Joyers</string>
 
+    <!-- LOGIN ACTIVITY -->
     <string name="login">LOGIN</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
 
-    <string name="errorInternet">Internet connection not Available</string>
+    <!-- UTILS  -->
+    <string name="internetConnectivityUnavailable">Internet connection not Available</string>
 
 
 </resources>

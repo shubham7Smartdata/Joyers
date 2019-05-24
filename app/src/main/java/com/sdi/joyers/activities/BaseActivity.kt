@@ -17,7 +17,6 @@ import com.sdi.joyers.R
 import com.sdi.joyers.utils.ConnectionDetector
 import com.sdi.joyers.utils.NetworkUtils
 
-
 /**
  * Created by shubham on 22/05/19.
  */
@@ -137,7 +136,7 @@ abstract class BaseActivity<V : AndroidViewModel> : AppCompatActivity() {
     }
 
     fun showInternetAlert(view: View) {
-        mSnackbar = Snackbar.make(view, R.string.errorInternet, Snackbar.LENGTH_SHORT)
+        mSnackbar = Snackbar.make(view, R.string.internetConnectivityUnavailable, Snackbar.LENGTH_SHORT)
         mSnackbar!!.show()
     }
 
