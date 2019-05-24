@@ -12,8 +12,8 @@ import android.net.ConnectivityManager
  */
 class JoyersApplication : Application() {
 
-    val TAG = JoyersApplication::class.java!!
-        .getSimpleName()
+    val TAG = JoyersApplication::class.java
+        .simpleName
     private var instance: JoyersApplication? = null
 
     fun getInstance(): JoyersApplication? {

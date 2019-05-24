@@ -54,10 +54,11 @@ public class MarshMallowPermission {
         TextView textView = (TextView) snackBarView.findViewById(R.id.snackbar_text);
         textView.setTextColor(ContextCompat.getColor(activity, Color.WHITE));
         textView.setMaxLines(3);
-        snackbar.setActionTextColor(ContextCompat.getColor(activity,Color.YELLOW));
-        snackbar.setAction(activity.getString(actionStringId),listener).show();
+        snackbar.setActionTextColor(ContextCompat.getColor(activity, Color.YELLOW));
+        snackbar.setAction(activity.getString(actionStringId), listener).show();
         snackbar.show();
     }
+
     public boolean checkPermissionForCamera() {
         int result = ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA);
         if (result == PackageManager.PERMISSION_GRANTED) {
@@ -71,7 +72,7 @@ public class MarshMallowPermission {
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.CAMERA)) {
 //            Toast.makeText(activity, "Camera permission needed. Please allow in App Settings for additional functionality.", Toast.LENGTH_LONG).show();
 
-            ActivityCompat.requestPermissions(activity,new String[]{Manifest.permission.CAMERA, WRITE_EXTERNAL_STORAGE},
+            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CAMERA, WRITE_EXTERNAL_STORAGE},
                     CAMERA_PERMISSION_REQUEST_CODE);
         } else {
             ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
@@ -117,27 +118,30 @@ public class MarshMallowPermission {
         }
     }
 
-//    boolean isFirstTime = false;
-//    public void requestPermissionForLocation() {
-//        boolean shouldProvideRationale =
-//                ActivityCompat.shouldShowRequestPermissionRationale(activity,
-//                        Manifest.permission.ACCESS_FINE_LOCATION);
-//        int checkSelfPermission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION);
-//        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.ACCESS_FINE_LOCATION)) {
-//            showSnackbar(R.string.location_permission,
-//                    android.R.string.ok, new View.OnClickListener() {
-//                        @Override
-//                        public void onItemClick(View view) {
-//                            // Request permission
-//                            ActivityCompat.requestPermissions(activity,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-//                                    LOCATION_PERMISSION_REQUEST_CODE);
-//                        }
-//                    });
-//
-//        }  else {
-//            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
-//        }
-//    }
+    public void requestPermissionForLocation() {
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            if (isFirstTime == 0) {
+                isFirstTime = 1;
+                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
+            } else if (isFirstTime == 1) {
+                snackBarLocation();
+            }
+
+        } else if (ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            showSnackbar(R.string.location_permission,
+                    R.string.enable, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            // Request permission
+                            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                    LOCATION_PERMISSION_REQUEST_CODE);
+                        }
+                    });
+
+        } else {
+            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
+        }
+    }
 
     public void snackBarLocation() {
 
@@ -213,7 +217,7 @@ public class MarshMallowPermission {
         }
     }
 
-    public void requestCameraStoragePermission(){
+    public void requestCameraStoragePermission() {
         if (ContextCompat.checkSelfPermission(activity, WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED ||
                 ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(activity,

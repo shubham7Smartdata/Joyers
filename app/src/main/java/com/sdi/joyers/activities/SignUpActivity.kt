@@ -13,14 +13,18 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.location.LocationResult
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.tasks.Task
 import com.sdi.joyers.R
 import com.sdi.joyers.data.UserModel
+import com.sdi.joyers.utils.GoogleMapInitiate
+import com.sdi.joyers.utils.LocationInterfacesCall
 import com.sdi.joyers.viewModel.UserViewModel
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
 
-class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
+class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener, LocationInterfacesCall.MapInterface {
 
     override val layoutId: Int
         get() = R.layout.activity_sign_up
@@ -33,8 +37,17 @@ class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
 
     private val RC_SIGN_IN = 1
     lateinit var mGoogleSignInClient: GoogleSignInClient
+    lateinit var mapInitiate: GoogleMapInitiate
+    lateinit var locationInterface: LocationInterfacesCall.LocationInterface
+
+
+    fun setInterface(location: LocationInterfacesCall.LocationInterface) {
+        locationInterface = location
+    }
 
     override fun onCreate() {
+        mapInitiate = GoogleMapInitiate(this, null)
+
         mViewModel!!.getUser().observe(this, object : Observer<UserModel> {
             override fun onChanged(@Nullable loginUser: UserModel) {
                 txtEmail.text = loginUser.email
@@ -56,13 +69,6 @@ class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
                         edName.text.toString()
                     )
                 )
-            }
-//            R.id.btn_fb_login -> {
-//
-//            }
-
-            R.id.btn_google_login -> {
-
             }
         }
     }
@@ -94,7 +100,7 @@ class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
             Log.w(TAG, "signInResult: code=" + account!!)
             mGoogleSignInClient.signOut()
 
-            updateUI(account)
+            updateUI(account = account)
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
@@ -114,11 +120,18 @@ class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
-
     private fun updateUI(account: GoogleSignInAccount) {
-        mViewModel!!.setLoginData(
-            UserModel("1", account.email.toString(), account.displayName.toString())
-        )
+        mViewModel!!.setLoginData(UserModel("1", account.email.toString(), account.displayName.toString()))
     }
+
+    override fun onLocationUpdate(location: LocationResult?) {
+        Log.e("LastLocation", location!!.lastLocation.toString())
+    }
+
+    override fun onMapReady(map: GoogleMap?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+
 }
 

@@ -6,8 +6,13 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
 
-    <!-- UTILS  -->
-    <string name="internetConnectivityUnavailable">Internet connection not Available</string>
+    <!--ERROR-->
+    <string name="errorInternet">Internet connection not Available</string>
+
+
+    <string name="enable">Enable</string>
+    <string name="location_permission">Enable Location permission</string>
+    <string name="finding_your_location">Finding your Location…</string>
 
 
 </resources>

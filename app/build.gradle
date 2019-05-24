@@ -62,9 +62,15 @@ dependencies {
     //Networking
     implementation 'com.amitshekhar.android:android-networking:1.0.2'
 
+    ///Google location
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
+    implementation 'com.google.android.gms:play-services-places:16.1.0'
+
 
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
 
 
 }
