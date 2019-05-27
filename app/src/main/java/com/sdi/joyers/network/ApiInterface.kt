@@ -1,8 +1,6 @@
-package com.sdi.joyers.network;
+package com.sdi.joyers.network
 
-public interface ApiInterface {
-
-    //    //API Method to get Questions From API
+interface ApiInterface//    //API Method to get Questions From API
 //
 //    @GET
 //    public Call<GooglePlaceModal> getGooglePlaces(@Url String url);
@@ -78,8 +76,6 @@ public interface ApiInterface {
 //
 //    @GET("get_category")
 //    Call<CategoryModel> get_category();
-
-
 //    @FormUrlEncoded
 //    @PUT("/api/user/getUserDocuments")
 //    Call<ActsModel> getActsUserDocuments(@Field("category") String category);
@@ -91,7 +87,6 @@ public interface ApiInterface {
 //    @GET("/api/user/getUserDirectory")
 //    Call<SenatorDetailModel> getUserDirectory();
 //
-
 //
 //    @FormUrlEncoded
 //    @PUT("/api/user/sendEmail")
@@ -109,5 +104,3 @@ public interface ApiInterface {
 //
 //    @GET("/api/user/getDeletedDocuments")
 //    Call<DeleteDataModel> getDeletedDocuments();
-
-}

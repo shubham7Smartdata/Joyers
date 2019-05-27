@@ -50,20 +50,14 @@ class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.btnLogin -> {
-                mViewModel!!.setLoginData(
-                    UserModel(
-                        "1", edEmail.text.toString(),
-                        edName.text.toString()
-                    )
-                )
+                mViewModel!!.setLoginData(UserModel("1", edEmail.text.toString(),
+                        edName.text.toString()))
             }
         }
     }
 
-
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 RC_SIGN_IN -> {
@@ -109,7 +103,8 @@ class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
     }
 
     private fun updateUI(account: GoogleSignInAccount) {
-        mViewModel!!.setLoginData(UserModel("1", account.email.toString(), account.displayName.toString()))
+        mViewModel!!.setLoginData(UserModel("1", account.email.toString(),
+            account.displayName.toString()))
     }
 }
 
