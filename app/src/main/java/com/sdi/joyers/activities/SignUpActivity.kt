@@ -38,8 +38,8 @@ class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
 
         mViewModel!!.getUser().observe(this, object : Observer<UserModel> {
             override fun onChanged(@Nullable loginUser: UserModel) {
-                txtEmail.text = loginUser.email
-                txtName.text = loginUser.password
+              //  txtEmail.text = loginUser.email
+             //   txtName.text = loginUser.password
             }
         })
     }
@@ -51,8 +51,8 @@ class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.btnLogin -> {
-                mViewModel!!.setLoginData(UserModel("1", edEmail.text.toString(),
-                        edName.text.toString()))
+              //  mViewModel!!.setLoginData(UserModel("1", edEmail.text.toString(),
+               //         edName.text.toString()))
             }
         }
     }
@@ -104,8 +104,8 @@ class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
     }
 
     private fun updateUI(account: GoogleSignInAccount) {
-        mViewModel!!.setLoginData(UserModel("1", account.email.toString(),
-            account.displayName.toString()))
+      //  mViewModel!!.setLoginData(UserModel("1", account.email.toString(),
+      //      account.displayName.toString()))
     }
 }
 
