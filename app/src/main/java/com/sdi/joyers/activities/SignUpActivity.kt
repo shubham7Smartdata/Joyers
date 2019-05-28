@@ -35,10 +35,11 @@ class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
 
 
     override fun onCreate() {
+
         mViewModel!!.getUser().observe(this, object : Observer<UserModel> {
             override fun onChanged(@Nullable loginUser: UserModel) {
                 txtEmail.text = loginUser.email
-                txtName.text = loginUser.name
+                txtName.text = loginUser.password
             }
         })
     }

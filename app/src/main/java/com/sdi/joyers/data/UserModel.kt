@@ -4,23 +4,41 @@ import android.util.Patterns
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
-class UserModel() {
-    constructor(userId: String?, email: String?, name: String?) : this() {
-        this.email = email.toString()
-        this.userId = userId.toString()
-        this.name = name.toString()
-    }
+class UserModel(
+/*
+//    constructor(userId: String?, email: String?, name: String?) : this() {
+//        this.email = email.toString()
+//        this.userId = userId.toString()
+//        this.password = name.toString()
+//    }
+//
+//    @PrimaryKey
+//    lateinit var userId: String
+//
+//    lateinit var password: String
+//
+//    lateinit var email: String
+//
+//    fun isEmailValid(): Boolean {
+//        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+//    }
+*/
 
-    @PrimaryKey
-    lateinit var userId: String
+    val `data`: Data,
+    val msg: String
+)
 
-    lateinit var name: String
-
-    lateinit var email: String
-
-    fun isEmailValid(): Boolean {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    }
-
-}
+data class Data(
+    val __v: Int,
+    val _createdDate: String,
+    val _id: String,
+    val _isActive: Boolean,
+    val _isDeleted: Boolean,
+    val _updatedDate: String,
+    val email: String,
+    val password: String,
+    val role: String,
+    val status: String,
+    val token: String,
+    val userStatus: String
+)

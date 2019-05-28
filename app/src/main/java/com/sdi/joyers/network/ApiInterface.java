@@ -1,8 +1,47 @@
-package com.sdi.joyers.network
+package com.sdi.joyers.network;
 
-interface ApiInterface//    //API Method to get Questions From API
-//
-//    @GET
+import com.sdi.joyers.data.UserModel;
+import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Header;
+import retrofit2.http.POST;
+
+public interface ApiInterface {
+
+    @FormUrlEncoded
+    @POST("users/register")
+    Call<UserModel> register_user(@Field("email") String email,
+                                  @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("users/authenticate")
+    Call<UserModel> authenticate_user(@Field("email") String email,
+                                  @Field("password") String password);
+
+
+    @FormUrlEncoded
+    @POST("users/current-user")
+    Call<UserModel> current_user(@Header("Authorization") String authorization);
+
+
+    @FormUrlEncoded
+    @POST("users/confirm-registration")
+    Call<UserModel> confirm_registration(@Field("token") String token);
+
+
+    @FormUrlEncoded
+    @POST("users/reset-password?")
+    Call<UserModel> reset_password(@Field("resetToken") String email,
+                                  @Field("password") String password);
+
+
+    @FormUrlEncoded
+    @POST("users/forgot-password")
+    Call<UserModel> forgot_password(@Field("email") String email);
+
+
+    //    @GET
 //    public Call<GooglePlaceModal> getGooglePlaces(@Url String url);
 //
 //    @GET
@@ -16,17 +55,14 @@ interface ApiInterface//    //API Method to get Questions From API
 //                                       @Field("device_token") String device_token,
 //                                       @Field("device_type") String device_type);
 //
-//    @FormUrlEncoded
-//    @POST("verify_otp")
-//    Call<UserModel> verify_otp(@Field("access_token") String access_token,
-//                               @Field("otp") String otp);
-//
-//
-//    @FormUrlEncoded
-//    @POST("resend_otp")
-//    Call<UserModel> resend_otp(@Field("access_token") String access_token);
-//
-//
+
+
+
+
+
+
+
+
 //    @FormUrlEncoded
 //    @POST("social_login")
 //    Call<UserModel> social_login(@Field("login_via") String login_via,
@@ -98,9 +134,6 @@ interface ApiInterface//    //API Method to get Questions From API
 //    @GET
 //    Call<YoutubeModel> getYoutubeVideos(@Url String url);
 //
-//    @GET("/api/user/getInformation")
-//    Call<InformationModel> getInformation();
-//
-//
-//    @GET("/api/user/getDeletedDocuments")
-//    Call<DeleteDataModel> getDeletedDocuments();
+
+
+}
