@@ -23,7 +23,7 @@ import com.sdi.joyers.utils.NetworkUtils
 
 abstract class BaseActivity<V : AndroidViewModel> : AppCompatActivity() {
 
-    var TAG: String = "$localClassName:-"
+    var TAG: String = "BaseActivity:-"
 
     // since its going to be common for all the activities
     var mViewModel: V? = null
@@ -136,7 +136,7 @@ abstract class BaseActivity<V : AndroidViewModel> : AppCompatActivity() {
     }
 
     fun showInternetAlert(view: View) {
-        mSnackbar = Snackbar.make(view, R.string.internetConnectivityUnavailable, Snackbar.LENGTH_SHORT)
+        mSnackbar = Snackbar.make(view, R.string.errorInternet, Snackbar.LENGTH_SHORT)
         mSnackbar!!.show()
     }
 

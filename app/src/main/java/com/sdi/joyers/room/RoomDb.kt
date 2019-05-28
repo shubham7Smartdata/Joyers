@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.sdi.joyers.data.UserModel
 
-@Database(entities = [UserModel::class], version = 1)
+@Database(entities = [UserModel.DataBean::class], version = 1)
 abstract class RoomDb : RoomDatabase() {
     abstract fun noteDao(): DaoAccess
 
