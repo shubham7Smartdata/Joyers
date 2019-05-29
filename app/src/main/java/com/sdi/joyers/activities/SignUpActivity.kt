@@ -41,6 +41,16 @@ class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
                 txtName.text = loginUser.data.password
             }
         })
+
+        mViewModel!!.getLoading().observe(this, object : Observer<Boolean> {
+            override fun onChanged(loader: Boolean?) {
+                if (loader!!) {
+                    showProgress()
+                } else {
+                    hideProgress()
+                }
+            }
+        })
     }
 
     override fun initListeners() {
@@ -53,7 +63,7 @@ class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
 //                var mModel: UserModel? = null
 //                mModel!!.data.email = txtEmail.text.toString()
 //                mModel.data.password = txtName.text.toString()
-                mViewModel!!.setLoginData(edEmail.text.toString(),edName.text.toString())
+                mViewModel!!.setLoginData(edEmail.text.toString(), edName.text.toString())
             }
         }
     }

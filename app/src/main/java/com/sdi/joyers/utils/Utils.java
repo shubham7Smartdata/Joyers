@@ -2,6 +2,8 @@ package com.sdi.joyers.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.util.TypedValue;
 
 public class Utils {
 
@@ -12,6 +14,8 @@ public class Utils {
         mActivity = activity;
         preferences = activity.getSharedPreferences(activity.getPackageName(), Context.MODE_PRIVATE);
     }
+
+
 
     public void setString(String key, String value) {
         SharedPreferences.Editor editor = preferences.edit();
@@ -51,6 +55,11 @@ public class Utils {
     public static int dpToPx(Context context, float dp) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return Math.round(dp * scale);
+    }
+
+    public static int dpToPx(float dp, Resources resources) {
+        float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, resources.getDisplayMetrics());
+        return (int) px;
     }
 
 }

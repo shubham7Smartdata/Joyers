@@ -32,5 +32,4 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         mUserModel!!.value = mRepository.registerUser(email = email, password = password)
     }
 
-
 }

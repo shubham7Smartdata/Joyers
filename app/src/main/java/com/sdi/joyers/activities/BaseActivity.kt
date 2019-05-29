@@ -15,6 +15,7 @@ import androidx.lifecycle.AndroidViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.sdi.joyers.R
 import com.sdi.joyers.utils.ConnectionDetector
+import com.sdi.joyers.utils.LoadingDialog
 import com.sdi.joyers.utils.NetworkUtils
 
 /**
@@ -90,17 +91,13 @@ abstract class BaseActivity<V : AndroidViewModel> : AppCompatActivity() {
         }
     }
 
-    //    fun hideLoading() {
-    //        if (mProgressDialog != null && mProgressDialog.isShowing) {
-    //            mProgressDialog.cancel()
-    //        }
-    //    }
+    protected fun showProgress() {
+        LoadingDialog.getLoader().showLoader(mContext)
+    }
 
-
-    //    public void showLoading() {
-    //        hideLoading();
-    //        mProgressDialog = CommonUtils.showLoadingDialog(this);
-    //    }
+    protected fun hideProgress() {
+        LoadingDialog.getLoader().dismissLoader()
+    }
 
     abstract fun onCreate()
 

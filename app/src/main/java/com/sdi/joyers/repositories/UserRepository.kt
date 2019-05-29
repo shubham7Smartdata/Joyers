@@ -34,6 +34,4 @@ class UserRepository(application: Application) {
             })
         return mUserModel
     }
-
-
 }
