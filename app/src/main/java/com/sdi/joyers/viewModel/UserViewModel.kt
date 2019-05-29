@@ -29,6 +29,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun setLoginData(email: String, password: String) {
+        mLoading!!.value=true
         mUserModel!!.value = mRepository.registerUser(email = email, password = password)
     }
 
