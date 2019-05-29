@@ -27,16 +27,18 @@ public class LoadingDialog {
             return mInstance;
         }
     }
+
     public void dismissLoader() {
         try {
             if (mProgress != null) {
                 mProgress.cancel();
                 mProgress = null;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     public void showLoader(Context con) {
         if (mProgress != null) {
             mProgress.cancel();
@@ -46,11 +48,13 @@ public class LoadingDialog {
         mProgress.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         WindowManager.LayoutParams wmlp = mProgress.getWindow().getAttributes();
 
-        wmlp.gravity = Gravity.CENTER ;
+        wmlp.gravity = Gravity.CENTER;
         mProgress.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         mProgress.setCancelable(false);
         mProgress.setContentView(R.layout.loading_dialog);
         mProgress.show();
+
+
     }
 
 }

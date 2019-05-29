@@ -33,22 +33,11 @@ class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
     override val context: Context
         get() = this@SignUpActivity
 
-
     override fun onCreate() {
         mViewModel!!.getUser().observe(this, object : Observer<UserModel> {
             override fun onChanged(@Nullable loginUser: UserModel) {
                 txtEmail.text = loginUser.data.email
                 txtName.text = loginUser.data.password
-            }
-        })
-
-        mViewModel!!.getLoading().observe(this, object : Observer<Boolean> {
-            override fun onChanged(loader: Boolean?) {
-                if (loader!!) {
-                    showProgress()
-                } else {
-                    hideProgress()
-                }
             }
         })
     }
@@ -60,9 +49,7 @@ class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.btnLogin -> {
-//                var mModel: UserModel? = null
-//                mModel!!.data.email = txtEmail.text.toString()
-//                mModel.data.password = txtName.text.toString()
+                showProgress()
                 mViewModel!!.setLoginData(edEmail.text.toString(), edName.text.toString())
             }
         }
