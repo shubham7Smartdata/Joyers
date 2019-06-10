@@ -37,8 +37,8 @@
                     android:layout_marginTop="16dp"
                     android:ems="10"
                     android:hint="Name"
-                    android:inputType="text"
-            />
+                    android:inputType="text"/>
+
             <Button
                     android:id="@+id/btnLogin"
                     android:layout_width="match_parent"
@@ -47,6 +47,15 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="32dp"
                     android:text="Click to Login"
+                    android:textSize="18sp"/>
+            <Button
+                    android:id="@+id/btnChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:text="Chart"
                     android:textSize="18sp"/>
 
             <TextView
@@ -93,11 +102,11 @@
                     android:layout_margin="@dimen/_12sdp"/>
 
             <!--<com.facebook.login.widget.LoginButton-->
-                    <!--android:id="@+id/btn_fb_login"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:padding="@dimen/_12sdp"-->
-                    <!--android:layout_margin="@dimen/_12sdp"/>-->
+            <!--android:id="@+id/btn_fb_login"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:padding="@dimen/_12sdp"-->
+            <!--android:layout_margin="@dimen/_12sdp"/>-->
 
         </LinearLayout>
 

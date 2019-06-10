@@ -18,6 +18,6 @@ class SplashActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }, Constants.SPLASH_TIME_OUT)
-    }
 
+    }
 }

@@ -45,6 +45,7 @@ class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
 
     override fun initListeners() {
         btnLogin.setOnClickListener(this)
+        btnChart.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -52,6 +53,10 @@ class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
             R.id.btnLogin -> {
                 showProgress()
                 mViewModel!!.setLoginData(edEmail.text.toString(), edName.text.toString())
+            }
+            R.id.btnChart -> {
+                val intent = Intent(mContext, ColumnChartActivity::class.java)
+                mContext.startActivity(intent)
             }
         }
     }

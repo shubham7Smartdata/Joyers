@@ -53,16 +53,16 @@ dependencies {
     annotationProcessor 'androidx.room:room-compiler:2.0.0'
     kapt 'androidx.room:room-compiler:2.0.0'
 
-    //facebook
+    // facebook
     implementation 'com.facebook.android:facebook-login:5.0.0'
 
-    //google
+    // google
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
 
-    //Networking
+    // Networking
     implementation 'com.amitshekhar.android:android-networking:1.0.2'
 
-    ///Google location
+    /// Google location
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation 'com.google.android.gms:play-services-places:16.1.0'
@@ -74,10 +74,9 @@ dependencies {
     /// okhttp3
     implementation 'com.squareup.okhttp3:logging-interceptor:3.12.3'
 
-
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
-
+    implementation project(path: ':anychart')
 
 }
