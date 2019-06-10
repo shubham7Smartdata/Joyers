@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_sign_up.*
 
 
 class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
+
     private val RC_SIGN_IN = 1
     lateinit var mGoogleSignInClient: GoogleSignInClient
 
@@ -103,7 +104,7 @@ class SignUpActivity : BaseActivity<UserViewModel>(), View.OnClickListener {
 
     private fun updateUI(account: GoogleSignInAccount) {
         //  mViewModel!!.setLoginData(UserModel("1", account.email.toString(),
-        //      account.displayName.toString()))
+        //  account.displayName.toString()))
     }
 }
 

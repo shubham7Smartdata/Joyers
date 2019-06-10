@@ -31,7 +31,6 @@ class UserRepository(application: Application) {
                         mUserModel = response.body()
                         LoadingDialog.getLoader().dismissLoader()
                     }
-
                     override fun onFailure(call: Call<UserModel>, t: Throwable) {
                         Log.d("mresponse", t.toString())
                         LoadingDialog.getLoader().dismissLoader()
@@ -39,6 +38,5 @@ class UserRepository(application: Application) {
                 })
         return mUserModel
     }
-
 
 }
